@@ -137,7 +137,9 @@
           "builder": "@nguniversal/builders:prerender",
           "options": {
             "routes": [
-              "/"
+              "/",
+              "/detalle",
+              "/inicio"
             ]
           },
           "configurations": {

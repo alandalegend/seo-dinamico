@@ -108,6 +108,16 @@ export class DetalleComponent implements OnInit{
     @Inject(PLATFORM_ID) private platformId: Object, 
     @Inject(DOCUMENT) private doc: any, 
     ){
+        
+    let id: any = ''
+    let name: any = ''
+        if(isPlatformBrowser(this.platformId)){ 
+            let url = window.location.search;
+            const params = new URLSearchParams(url);
+            id = params.get('id')
+            name = params.get('name')
+        }
+        this.setSeo(name, 'https://rickandmortyapi.com/api/character/avatar/'+id+'.jpeg')  
     } 
       
     result: any =[]
@@ -119,7 +129,7 @@ export class DetalleComponent implements OnInit{
           this.name =  e.name;       
            
           
-          this.meta.addTag({name: 'robots', content:'noindex'}) 
+        //   this.meta.addTag({name: 'robots', content:'noindex'}) 
           const linkElement = this.doc.head.querySelector(`link[rel='canonical']`)
           || this.doc.head.appendChild(this.doc.createElement('link'));
           
@@ -129,7 +139,9 @@ export class DetalleComponent implements OnInit{
           } 
         });
         
-      this.setSeo(this.name, 'https://rickandmortyapi.com/api/character/avatar/'+this.id+'.jpeg')  
+      setTimeout(() => {
+        this.setSeo(this.name, 'https://rickandmortyapi.com/api/character/avatar/'+this.id+'.jpeg')  
+      }, 4000);
         this.getInfoPersonaje();
   }
   
@@ -137,20 +149,12 @@ export class DetalleComponent implements OnInit{
     this.meta.removeTag( 'name="robots"' )
   }
 
-  setSeo(title: any ='Sin titulo', image: any  ){
-    // if(isPlatformBrowser(this.platformId)){ 
-    //     let url = window.location.href;
-    //     const params = new URLSearchParams(url);
-    //     let id = params.has('id')
-
-    //     console.log(params)
-    //     console.log(id)
-    // }
+  setSeo(title: any ='Sin titulo', image: any  ){ 
     let ima2 = 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'
 
-    this.title.setTitle( title +' | SEO dinamico') 
+            this.title.setTitle( title +' | SEO dinamico') 
           this.meta.updateTag({ property: 'og:title', content: title +' | SeoDinamico' }); 
-          this.meta.updateTag({ property: 'description', content: image }); 
+          this.meta.updateTag({ property: 'description', content: `${image} ....... ${title}` }); 
           this.meta.updateTag({ property: 'og:image', content: ima2});
   }
   
