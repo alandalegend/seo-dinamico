@@ -7,13 +7,15 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
-  styleUrls: ['./detalle.component.scss']
+  styleUrls: ['./detalle.component.scss'],
+
+  host: {ngSkipHydration: 'true'},
 })
 export class DetalleComponent implements OnInit {
 
   // ulrimg="http://webdiputados/{titujloentrada}.png";
-  urlimagen = 'https://rickandmortyapi.com/api/character/avatar/'
-
+  image_url = 'https://rickandmortyapi.com/api/character/avatar/1.jpeg';
+  page_title="'Hola!!!";
 
   constructor(
     private httpService: HttpClient,
@@ -32,7 +34,7 @@ export class DetalleComponent implements OnInit {
       id = params.get('id')
       name = params.get('name')
     }
-    this.setSeo(name, 'https://rickandmortyapi.com/api/character/avatar/' + id + '.jpeg')
+    // this.setSeo(name, 'https://rickandmortyapi.com/api/character/avatar/' + id + '.jpeg')
   }
 
   result: any = []
@@ -54,9 +56,9 @@ export class DetalleComponent implements OnInit {
       }
     });
 
-    setTimeout(() => {
-      this.setSeo(this.name, 'https://rickandmortyapi.com/api/character/avatar/' + this.id + '.jpeg')
-    }, 4000);
+    // setTimeout(() => {
+    //   this.setSeo(this.name, 'https://rickandmortyapi.com/api/character/avatar/' + this.id + '.jpeg')
+    // }, 4000);
     this.getInfoPersonaje();
   }
 
@@ -64,11 +66,9 @@ export class DetalleComponent implements OnInit {
     this.meta.removeTag('name="robots"')
   }
 
-  setSeo(title: any = 'Sin titulo', image: any) {
-    let ima2 = 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'
-
-
-  }
+  // setSeo(title: any = 'Sin titulo', image: any) {
+  //   let ima2 = 'https://rickandmortyapi.com/api/character/avatar/3.jpeg'
+  // }
 
   async getInfoPersonaje() {
     await this.httpService.get('https://rickandmortyapi.com/api/character/' + this.id).subscribe((result: any) => {
@@ -76,10 +76,10 @@ export class DetalleComponent implements OnInit {
       console.log('h', result);
       this.title.setTitle(this.result.name + ' | SEO dinamico')
       this.meta.updateTag({ property: 'description', content: `${this.result.image}` });
+      this.meta.updateTag({ property: 'og:description', content: `Detalle de ${result.name}` });
       this.meta.updateTag({ property: 'og:title', content: this.result.name + ' | SeoDinamico' });
       this.meta.updateTag({ property: 'og:image', content: this.result.image });
-
-
+      this.meta.updateTag({ property: 'twitter:image', content: this.result.image });
     })
   }
 

@@ -39,7 +39,9 @@ function initializeAppFactory(httpClient: HttpClient): () => Observable<any> {
     BrowserModule,
     RouterModule
   ],
-  providers: [{
+  providers: [
+    
+    {
     provide: APP_INITIALIZER,
     useFactory: initializeAppFactory,
     deps: [HttpClient],

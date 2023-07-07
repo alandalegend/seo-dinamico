@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://ng-sandbox.dalegend.net/sitemap.xml

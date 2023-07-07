@@ -1,22 +1,78 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <title>Jonathan AH</title> 
-  <!-- <meta property="og:title" content="Jonathan Seo Dinamico "/> 
-  <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
-  <meta property="og:image" content="https://perfilangular.web.app/assets/image/logos/logosinfonfo.png" />
-  <meta name="description" content="Ejercicio de seo de angular dinamico" /> -->
-  
+  <title>Demo DEFAULT Angular</title>
+
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
+  <title>{{ page_title }}</title>
+  <meta name="description" content="">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="">
+  <meta property="og:description" content="">
+  <meta property="og:site_name" content="Your Website">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="website">
+
+  <meta property="og:image" content=""> <!-- Image URL goes here -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:title" content="">
+  <meta name="twitter:description" content="">
+  <meta name="twitter:url" content="">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content=""> <!-- Image URL goes here -->
+  <meta name="twitter:image:width" content="1200">
+  <meta name="twitter:image:height" content="630">
+
+
+
+
 </head>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" ></script>
+<script>
+  "use strict";
+  $(function () {
+    
+
+    const url = window.location.href;
+    let algo = "https://rickandmortyapi.com/api/character/avatar/";
+    let urlImg = url.split('?id=').reverse()[0];
+    console.log(urlImg);
+    let some = `${algo}/${urlImg}.jpeg`;
+    // document.getElementById('nnaammee').setAttribute("content",  `${some}`);
+
+
+    const title = "your title";
+    const description = "your description";
+    
+    $('meta[name="description"]').attr('content', description);
+    $('meta[property="og:title"]').attr('content', title);
+    $('meta[property="og:image"]').attr('content', some);
+    $('meta[property="twitter:image"]').attr('content', some);
+    $('meta[property="og:description"]').attr('content', description);
+    // etc.
+
+
+    // alert(url);
+  });
+</script>
+
 <body>
   <app-root></app-root>
 </body>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</html> 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+</html>
